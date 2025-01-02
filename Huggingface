@@ -1,0 +1,54 @@
+(function() {
+    // Create the button dynamically
+    const button = document.createElement('button');
+    button.textContent = 'Copy Text';
+    button.style.position = 'fixed';  // Position it fixed on the screen
+    button.style.top = '400px';        // Position 10px from the top
+    button.style.left = '300px';       // Position 10px from the left
+    button.style.padding = '10px 20px';
+    button.style.backgroundColor = '#28a745';  // Initial green button color
+    button.style.color = 'white';             // Text color is white in the default state
+    button.style.border = 'none';
+    button.style.borderRadius = '5px';
+    button.style.cursor = 'pointer';
+    button.style.zIndex = '9999';     // Ensure the button is visible on top of other content
+    button.style.transition = 'background-color 0.3s ease, color 0.3s ease';  // Smooth color transition
+    document.body.appendChild(button);  // Add the button to the page
+
+    // Function to copy the current text content of the <p> element
+    async function copytext() {
+        // Select the <p> element with the specific class
+        const pelement = document.querySelector('.alert.alert-success.mt-4');
+        
+        if (!pelement) {
+            return;
+        }
+
+        const texttocopy = pelement.textContent.trim();  // Get the latest text content from the <p> element
+
+        // Check if there is any text to copy
+        if (texttocopy) {
+            try {
+                // Use the Clipboard API to copy the text
+                await navigator.clipboard.writeText(texttocopy);
+                
+                // Change the button color to white temporarily when clicked
+                const originalcolor = button.style.backgroundColor;
+                const originaltextcolor = button.style.color;
+                button.style.backgroundColor = 'white';  // Turn the button white
+                button.style.color = 'black';  // Change the text color to black for visibility
+
+                // Revert the color back to green and text color back to white after a short delay
+                setTimeout(() => {
+                    button.style.backgroundColor = originalcolor;  // Revert back to green
+                    button.style.color = originaltextcolor;  // Revert text color back to white
+                }, 2000);  // Change back after 300ms
+            } catch (err) {
+                // Handle error silently if necessary
+            }
+        }
+    }
+
+    // Add the event listener to the button
+    button.addEventListener('click', copytext);
+})();
