@@ -3,8 +3,8 @@
     const button = document.createElement('button');
     button.textContent = 'Copy Text';
     button.style.position = 'fixed';  // Position it fixed on the screen
-    button.style.top = '600px';        // Position 10px from the top
-    button.style.left = '270px';       // Position 10px from the left
+    button.style.top = '500px';        // Position 10px from the top
+    button.style.left = '250px';       // Position 10px from the left
     button.style.padding = '50px 60px';
     button.style.backgroundColor = '#28a745';  // Initial green button color
     button.style.color = 'white';             // Text color is white in the default state
